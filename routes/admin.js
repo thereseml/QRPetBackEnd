@@ -1,13 +1,13 @@
-const router = require('express').Router();
-let Admin = require('../models/admin.model');
+const router = require("express").Router();
+let Admin = require("../models/admin.model");
 
-router.route('/').get((req, res) => {
+router.route("/").get((req, res) => {
   Admin.find()
     .then((admin) => res.json(admin))
-    .catch((err) => res.status(400).json('Error: ' + err));
+    .catch((err) => res.status(400).json("Error: " + err));
 });
 
-router.route('/add').post((req, res) => {
+router.route("/add").post((req, res) => {
   const username = req.body.username;
   const password = req.body.password;
 
@@ -18,8 +18,8 @@ router.route('/add').post((req, res) => {
 
   newAdmin
     .save()
-    .then(() => res.json('Admin added!'))
-    .catch((err) => res.status(400).json('Error: ' + err));
+    .then(() => res.json("Admin added!"))
+    .catch((err) => res.status(400).json("Error: " + err));
 });
 
 module.exports = router;

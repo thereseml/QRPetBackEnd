@@ -1,7 +1,6 @@
-const mongoose = require('mongoose');
-const Schema = mongoose;
+const mongoose = require("mongoose");
 
-const petsSchema = new Schema({
+const petsSchema = mongoose.Schema({
   name: { type: String, required: true },
   breed: { type: String, required: true },
   color: { type: String, required: true },
@@ -10,5 +9,5 @@ const petsSchema = new Schema({
   details: { type: String, required: true },
 });
 
-const Pets = mongoose.model('Pets', petsSchema);
+const Pets = mongoose.model("Pets", petsSchema);
 module.exports = Pets;

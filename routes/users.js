@@ -1,13 +1,13 @@
-const router = require('express').Router();
-let Users = require('../models/users.model');
+const router = require("express").Router();
+let Users = require("../models/users.model");
 
-router.route('/').get((req, res) => {
+router.route("/").get((req, res) => {
   Users.find()
     .then((users) => res.json(users))
-    .catch((err) => res.status(400).json('Error: ' + err));
+    .catch((err) => res.status(400).json("Error: " + err));
 });
 
-router.route('/add').post((req, res) => {
+router.route("/add").post((req, res) => {
   const firstname = req.body.firstname;
   const lastname = req.body.lastname;
   const email = req.body.email;
@@ -34,14 +34,14 @@ router.route('/add').post((req, res) => {
 
   newUser
     .save()
-    .then(() => res.json('User added!'))
-    .catch((err) => res.status(400).json('Error: ' + err));
+    .then(() => res.json("User added!"))
+    .catch((err) => res.status(400).json("Error: " + err));
 });
 
-router.route('/:id').get((req, res) => {
+router.route("/:id").get((req, res) => {
   Users.findById(req.params.id)
     .then((user) => res.json(user))
-    .catch((err) => res.status(400).json('Error: ' + err));
+    .catch((err) => res.status(400).json("Error: " + err));
 });
 
 module.exports = router;
