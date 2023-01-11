@@ -10,6 +10,7 @@ router.route("/").get((req, res) => {
 router.route("/add").post((req, res) => {
   const useremail = req.body.useremail;
   const name = req.body.name;
+  const petType = req.body.petType;
   const breed = req.body.breed;
   const color = req.body.color;
   const image = req.body.image;
@@ -19,6 +20,7 @@ router.route("/add").post((req, res) => {
   const newPet = new Pets({
     useremail,
     name,
+    petType,
     breed,
     color,
     image,
@@ -49,6 +51,7 @@ router.route("/update/:id").post((req, res) => {
     .then((pet) => {
       pet.useremail = req.body.useremail;
       pet.name = req.body.name;
+      pet.petType = req.body.petType;
       pet.breed = req.body.breed;
       pet.color = req.body.color;
       pet.image = req.body.image;
