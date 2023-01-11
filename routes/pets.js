@@ -8,6 +8,7 @@ router.route("/").get((req, res) => {
 });
 
 router.route("/add").post((req, res) => {
+  const useremail = req.body.useremail;
   const name = req.body.name;
   const breed = req.body.breed;
   const color = req.body.color;
@@ -16,6 +17,7 @@ router.route("/add").post((req, res) => {
   const details = req.body.details;
 
   const newPet = new Pets({
+    useremail,
     name,
     breed,
     color,
@@ -33,6 +35,31 @@ router.route("/add").post((req, res) => {
 router.route("/:id").get((req, res) => {
   Pets.findById(req.params.id)
     .then((pet) => res.json(pet))
+    .catch((err) => res.status(400).json("Error: " + err));
+});
+
+router.route("/:id").delete((req, res) => {
+  Pets.findByIdAndDelete(req.params.id)
+    .then(() => res.json("Pet deleted."))
+    .catch((err) => res.status(400).json("Error: " + err));
+});
+
+router.route("/update/:id").post((req, res) => {
+  Pets.findById(req.params.id)
+    .then((pet) => {
+      pet.useremail = req.body.useremail;
+      pet.name = req.body.name;
+      pet.breed = req.body.breed;
+      pet.color = req.body.color;
+      pet.image = req.body.image;
+      pet.chipNr = req.body.chipNr;
+      pet.details = req.body.details;
+
+      pet
+        .save()
+        .then(() => res.json("Pet updated!"))
+        .catch((err) => res.status(400).json("Error: " + err));
+    })
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
