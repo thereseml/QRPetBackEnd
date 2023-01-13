@@ -8,10 +8,14 @@ router.route("/").get((req, res) => {
 });
 
 router.route("/add").post((req, res) => {
+  const firstname = req.body.firstname;
+  const lastname = req.body.lastname;
   const username = req.body.username;
   const password = req.body.password;
 
   const newAdmin = new Admin({
+    firstname,
+    lastname,
     username,
     password,
   });
@@ -37,6 +41,8 @@ router.route("/:id").delete((req, res) => {
 router.route("/update/:id").post((req, res) => {
   Admin.findById(req.params.id)
     .then((admin) => {
+      admin.firstname = req.body.firstname;
+      admin.lastname = req.body.lastname;
       admin.username = req.body.username;
       admin.password = req.body.password;
 

@@ -5,6 +5,8 @@ POST http://localhost:8000/admin/add HTTP/1.1
 Content-Type: application/json
 
 {
+    "firstname": "Therese",
+    "lastname": "Lindholm",
     "username": "admin",
     "password": "123hej"
 }
@@ -15,25 +17,47 @@ POST http://localhost:8000/users/add HTTP/1.1
 Content-Type: application/json
 
 {
-    "firstname": "Therese",
+    "firstname": "Elin",
     "lastname": "Lindholm",
-    "email": "tm-l@live.se",
-    "password": "hejhej123",
-    "phone": "0761335015",
+    "useremail": "test@mail.com",
+    "password": "he234324j123",
+    "phone": "07623435",
     "address": "Vårgatan 1",
     "city": "Höganäs",
     "zip": "26334",
+    "secondowner": [ {
+        "firstname": "ella",
+        "lastname": "larsson",
+        "phone": "03243223",
+        "address": "varavara 1",
+        "city": "erwr",
+        "zip": "21454" 
+    }],
     "pets": [ {
-    "name": "Boston",
-    "breed": "Cane Corso",
-    "color": "fawn",
-    "image": "img",
-    "chipNr": "32095849380320",
-    "details": "Snäll och trevlig" }]
+        "name": "Boston",
+        "petType": "katt", 
+        "breed": "Cane Corso",
+        "color": "fawn",
+        "image": "img",
+        "chipNr": "564566565",
+        "details": "Snäll och trevlig" }]
 }
 
 ###
-GET http://localhost:8000/users/ HTTP/1.1
+
+PUT  http://localhost:8000/users/update/63c038d7a6dfcb042ab014df/pets HTTP/1.1
+Content-Type: application/json
+
+ { 
+        "name": "Lisa",
+        "petType": "katt", 
+        "breed": "Blandras",
+        "color": "fawn",
+        "image": "img",
+        "chipNr": "24353454655",
+        "details": "Snäll och trevlig" 
+}
+
 
 ###
-GET http://localhost:8000/pets/ HTTP/1.1
+GET http://localhost:8000/users/ HTTP/1.1

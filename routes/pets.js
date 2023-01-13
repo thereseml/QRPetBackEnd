@@ -8,7 +8,6 @@ router.route("/").get((req, res) => {
 });
 
 router.route("/add").post((req, res) => {
-  const useremail = req.body.useremail;
   const name = req.body.name;
   const petType = req.body.petType;
   const breed = req.body.breed;
@@ -16,9 +15,9 @@ router.route("/add").post((req, res) => {
   const image = req.body.image;
   const chipNr = req.body.chipNr;
   const details = req.body.details;
+  const ownerId = req.body.ownerId;
 
   const newPet = new Pets({
-    useremail,
     name,
     petType,
     breed,
@@ -26,6 +25,7 @@ router.route("/add").post((req, res) => {
     image,
     chipNr,
     details,
+    ownerId,
   });
 
   newPet
@@ -36,7 +36,7 @@ router.route("/add").post((req, res) => {
 
 router.route("/:id").get((req, res) => {
   Pets.findById(req.params.id)
-    .then((pet) => res.json(pet))
+    .then((pets) => res.json(pets))
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
@@ -48,17 +48,17 @@ router.route("/:id").delete((req, res) => {
 
 router.route("/update/:id").post((req, res) => {
   Pets.findById(req.params.id)
-    .then((pet) => {
-      pet.useremail = req.body.useremail;
-      pet.name = req.body.name;
-      pet.petType = req.body.petType;
-      pet.breed = req.body.breed;
-      pet.color = req.body.color;
-      pet.image = req.body.image;
-      pet.chipNr = req.body.chipNr;
-      pet.details = req.body.details;
+    .then((pets) => {
+      pets.name = req.body.name;
+      pets.petType = req.body.petType;
+      pets.breed = req.body.breed;
+      pets.color = req.body.color;
+      pets.image = req.body.image;
+      pets.chipNr = req.body.chipNr;
+      pets.details = req.body.details;
+      pets.ownerId = req.body.ownerId;
 
-      pet
+      pets
         .save()
         .then(() => res.json("Pet updated!"))
         .catch((err) => res.status(400).json("Error: " + err));

@@ -1,9 +1,10 @@
 const router = require("express").Router();
-let Users = require("../models/users.model");
+let secondOwner = require("../models/secondOwner.model");
 
 router.route("/").get((req, res) => {
-  Users.find()
-    .then((users) => res.json(users))
+  secondOwner
+    .find()
+    .then((secondOwner) => res.json(secondOwner))
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
@@ -16,8 +17,9 @@ router.route("/add").post((req, res) => {
   const address = req.body.address;
   const city = req.body.city;
   const zip = Number(req.body.zip);
+  const ownerId = req.body.ownerId;
 
-  const newUserAndPet = new Users({
+  const newSecondOwner = new secondOwner({
     firstname,
     lastname,
     useremail,
@@ -26,41 +28,46 @@ router.route("/add").post((req, res) => {
     address,
     city,
     zip,
+    ownerId,
   });
 
-  newUserAndPet
+  newSecondOwner
     .save()
-    .then(() => res.json("User and pet added!"))
+    .then(() => res.json("Second owner added!"))
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
 router.route("/:id").get((req, res) => {
-  Users.findById(req.params.id)
-    .then((users) => res.json(users))
+  secondOwner
+    .findById(req.params.id)
+    .then((secondOwner) => res.json(secondOwner))
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
 router.route("/:id").delete((req, res) => {
-  Users.findByIdAndDelete(req.params.id)
-    .then(() => res.json("User and pet deleted."))
+  secondOwner
+    .findByIdAndDelete(req.params.id)
+    .then(() => res.json("Second owner deleted."))
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
 router.route("/update/:id").put((req, res) => {
-  Users.findById(req.params.id)
-    .then((users) => {
-      users.firstname = req.body.firstname;
-      users.lastname = req.body.lastname;
-      users.useremail = req.body.useremail;
-      users.password = req.body.password;
-      users.phone = Number(req.body.phone);
-      users.address = req.body.address;
-      users.city = req.body.city;
-      users.zip = Number(req.body.zip);
+  secondOwner
+    .findById(req.params.id)
+    .then((secondOwner) => {
+      secondOwner.firstname = req.body.firstname;
+      secondOwner.lastname = req.body.lastname;
+      secondOwner.useremail = req.body.useremail;
+      secondOwner.password = req.body.password;
+      secondOwner.phone = Number(req.body.phone);
+      secondOwner.address = req.body.address;
+      secondOwner.city = req.body.city;
+      secondOwner.zip = Number(req.body.zip);
+      secondOwner.ownerId = req.body.ownerId;
 
-      users
+      secondOwner
         .save()
-        .then(() => res.json("User and pet updated!"))
+        .then(() => res.json("Second owner updated!"))
         .catch((err) => res.status(400).json("Error: " + err));
     })
     .catch((err) => res.status(400).json("Error: " + err));
