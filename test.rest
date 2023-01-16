@@ -17,47 +17,31 @@ POST http://localhost:8000/users/add HTTP/1.1
 Content-Type: application/json
 
 {
-    "firstname": "Elin",
+    "firstname": "Esaa",
     "lastname": "Lindholm",
-    "useremail": "test@mail.com",
+    "useremail": "test45665@mail.com",
     "password": "he234324j123",
     "phone": "07623435",
     "address": "Vårgatan 1",
     "city": "Höganäs",
-    "zip": "26334",
-    "secondowner": [ {
-        "firstname": "ella",
-        "lastname": "larsson",
-        "phone": "03243223",
-        "address": "varavara 1",
-        "city": "erwr",
-        "zip": "21454" 
-    }],
-    "pets": [ {
-        "name": "Boston",
-        "petType": "katt", 
-        "breed": "Cane Corso",
-        "color": "fawn",
-        "image": "img",
-        "chipNr": "564566565",
-        "details": "Snäll och trevlig" }]
+    "zip": "26334"
 }
 
 ###
 
-PUT  http://localhost:8000/users/update/63c038d7a6dfcb042ab014df/pets HTTP/1.1
+GET http://localhost:8000/users/ HTTP/1.1
+
+###
+POST http://localhost:8000/pets/add HTTP/1.1
 Content-Type: application/json
 
- { 
-        "name": "Lisa",
-        "petType": "katt", 
-        "breed": "Blandras",
-        "color": "fawn",
-        "image": "img",
-        "chipNr": "24353454655",
-        "details": "Snäll och trevlig" 
+{
+    "name": "Boston",
+    "petType": "Hund",
+    "breed": "Cane Corso",
+    "color": "fawn",
+    "image": "",
+    "chipNr": "565012065",
+    "details": "Höganäs",
+    "ownerId": "26516181102"
 }
-
-
-###
-GET http://localhost:8000/users/ HTTP/1.1

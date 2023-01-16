@@ -19,10 +19,14 @@ connection.once("open", () => {
 });
 
 const UsersRouter = require("./routes/users");
+const PetsRouter = require("./routes/pets");
 const AdminRouter = require("./routes/admin");
+const SecondRouter = require("./routes/secondOwners");
 
 app.use("/users", UsersRouter);
+app.use("/pets", PetsRouter);
 app.use("/admin", AdminRouter);
+app.use("/secondOwner", SecondRouter);
 
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);

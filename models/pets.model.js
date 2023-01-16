@@ -16,7 +16,7 @@ const PetsSchema = mongoose.Schema({
   petType: reqString,
   breed: reqString,
   color: reqString,
-  image: reqString,
+  image: String,
   chipNr: reqNumberUniq,
   details: reqString,
   ownerId: reqString,

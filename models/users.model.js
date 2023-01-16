@@ -5,7 +5,7 @@ const reqString = {
   required: true,
 };
 
-const usersAndPetsSchema = mongoose.Schema({
+const usersSchema = mongoose.Schema({
   firstname: reqString,
   lastname: reqString,
   useremail: { type: String, required: true, unique: true },
@@ -16,5 +16,5 @@ const usersAndPetsSchema = mongoose.Schema({
   zip: { type: Number, required: true },
 });
 
-const UserAndPets = mongoose.model("Users", usersAndPetsSchema);
-module.exports = UserAndPets;
+const Users = mongoose.model("Users", usersSchema);
+module.exports = Users;

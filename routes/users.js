@@ -17,7 +17,7 @@ router.route("/add").post((req, res) => {
   const city = req.body.city;
   const zip = Number(req.body.zip);
 
-  const newUserAndPet = new Users({
+  const newUser = new Users({
     firstname,
     lastname,
     useremail,
@@ -28,9 +28,15 @@ router.route("/add").post((req, res) => {
     zip,
   });
 
-  newUserAndPet
+  newUser
     .save()
-    .then(() => res.json("User and pet added!"))
+    .then(() => {
+      res.send({
+        status: "success",
+        message: "User added!",
+        id: newUser._id,
+      });
+    })
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
@@ -60,7 +66,7 @@ router.route("/update/:id").put((req, res) => {
 
       users
         .save()
-        .then(() => res.json("User and pet updated!"))
+        .then(() => res.json("User updated!"))
         .catch((err) => res.status(400).json("Error: " + err));
     })
     .catch((err) => res.status(400).json("Error: " + err));
