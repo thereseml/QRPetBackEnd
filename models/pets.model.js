@@ -1,25 +1,14 @@
 const mongoose = require("mongoose");
 
-const reqString = {
-  type: String,
-  required: true,
-};
-
-const reqNumberUniq = {
-  type: Number,
-  required: true,
-  unique: true,
-};
-
 const PetsSchema = mongoose.Schema({
-  name: reqString,
-  petType: reqString,
-  breed: reqString,
-  color: reqString,
-  image: String,
-  chipNr: reqNumberUniq,
-  details: reqString,
-  ownerId: reqString,
+  name: { type: String, required: true },
+  petType: { type: String, required: true },
+  breed: { type: String, required: true },
+  color: { type: String, required: true },
+  image: { type: String },
+  chipNr: { type: Number, required: true, unique: true },
+  details: { type: String, required: true },
+  ownerId: { type: String, required: true },
 });
 
 const Pets = mongoose.model("Pets", PetsSchema);
