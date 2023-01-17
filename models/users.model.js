@@ -1,18 +1,13 @@
 const mongoose = require("mongoose");
 
-const reqString = {
-  type: String,
-  required: true,
-};
-
 const usersSchema = mongoose.Schema({
-  firstname: reqString,
-  lastname: reqString,
+  firstname: { type: String, required: true },
+  lastname: { type: String, required: true },
   useremail: { type: String, required: true, unique: true },
-  password: reqString,
+  password: { type: String, required: true },
   phone: { type: Number, required: true },
-  address: reqString,
-  city: reqString,
+  address: { type: String, required: true },
+  city: { type: String, required: true },
   zip: { type: Number, required: true },
 });
 

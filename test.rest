@@ -45,3 +45,9 @@ Content-Type: application/json
     "details": "Höganäs",
     "ownerId": "26516181102"
 }
+
+###
+GET http://localhost:8000/pets/owner/63c540a51475749c5ac2d089 HTTP/1.1
+
+###
+DELETE http://localhost:8000/pets/63c544931475749c5ac2d08b HTTP/1.1

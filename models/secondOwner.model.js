@@ -1,20 +1,13 @@
 const mongoose = require("mongoose");
 
-const string = {
-  type: String,
-};
-const number = {
-  type: Number,
-};
-
 const secondOwnerSchema = mongoose.Schema({
-  firstname: string,
-  lastname: string,
-  phone: number,
-  address: string,
-  city: string,
-  zip: number,
-  ownerId: string,
+  firstname: { type: String, required: true },
+  lastname: { type: String, required: true },
+  phone: { type: Number, required: true },
+  address: { type: String, required: true },
+  city: { type: String, required: true },
+  zip: { type: Number, required: true },
+  ownerId: { type: String, required: true },
 });
 
 const secondOwner = mongoose.model("SecondOwner", secondOwnerSchema);
