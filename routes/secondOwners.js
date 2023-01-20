@@ -37,9 +37,18 @@ router.route("/add").post((req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
+// hämta second owner eget id
 router.route("/:id").get((req, res) => {
   secondOwner
     .findById(req.params.id)
+    .then((secondOwner) => res.json(secondOwner))
+    .catch((err) => res.status(400).json("Error: " + err));
+});
+
+// hämta second owner med samma id som ägaren
+router.route("/owner/:id").get((req, res) => {
+  secondOwner
+    .find({ ownerId: req.params.id })
     .then((secondOwner) => res.json(secondOwner))
     .catch((err) => res.status(400).json("Error: " + err));
 });
