@@ -1,5 +1,6 @@
 const router = require("express").Router();
 let Users = require("../models/users.model");
+let LoginUser = require("../models/loginUser.model");
 
 router.route("/").get((req, res) => {
   Users.find()
@@ -40,9 +41,39 @@ router.route("/add").post((req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
+router.route("/login").post((req, res) => {
+  Users.find({ useremail: req.body.useremail })
+    .then(
+      (
+        user // user är en array med ett objekt
+      ) => {
+        if (user.length === 0) {
+          res.send({
+            status: "error",
+            message: "User not found",
+          });
+        } else {
+          if (user[0].password === req.body.password) {
+            res.send({
+              status: "success",
+              message: "User logged in",
+              id: user[0]._id,
+            });
+          } else {
+            res.send({
+              status: "error",
+              message: "Wrong password",
+            });
+          }
+        }
+      }
+    )
+    .catch((err) => res.status(400).json("Error: " + err));
+});
+
 router.route("/:id").get((req, res) => {
   Users.findById(req.params.id)
-    .then((users) => res.json(users))
+    .then((users) => res.json(users._id))
     .catch((err) => res.status(400).json("Error: " + err));
 });
 

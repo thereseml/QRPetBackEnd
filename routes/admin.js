@@ -8,21 +8,39 @@ router.route("/").get((req, res) => {
 });
 
 router.route("/add").post((req, res) => {
-  const firstname = req.body.firstname;
-  const lastname = req.body.lastname;
-  const username = req.body.username;
+  const useremail = req.body.username;
   const password = req.body.password;
 
   const newAdmin = new Admin({
-    firstname,
-    lastname,
-    username,
+    useremail,
     password,
   });
 
   newAdmin
     .save()
     .then(() => res.json("Admin added!"))
+    .catch((err) => res.status(400).json("Error: " + err));
+});
+
+router.route("/login").post((req, res) => {
+  const useremail = req.body.username;
+  const password = req.body.password;
+
+  Admin.findOne
+    .then((admin) => {
+      if (admin.useremail === useremail && admin.password === password) {
+        res.send({
+          status: "success",
+          message: "Admin logged in!",
+          id: admin._id,
+        });
+      } else {
+        res.send({
+          status: "error",
+          message: "Admin not found!",
+        });
+      }
+    })
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
@@ -41,9 +59,7 @@ router.route("/:id").delete((req, res) => {
 router.route("/update/:id").post((req, res) => {
   Admin.findById(req.params.id)
     .then((admin) => {
-      admin.firstname = req.body.firstname;
-      admin.lastname = req.body.lastname;
-      admin.username = req.body.username;
+      admin.useremail = req.body.useremail;
       admin.password = req.body.password;
 
       admin
