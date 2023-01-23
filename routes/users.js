@@ -73,7 +73,7 @@ router.route("/login").post((req, res) => {
 
 router.route("/:id").get((req, res) => {
   Users.findById(req.params.id)
-    .then((users) => res.json(users._id))
+    .then((users) => res.json(users))
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
