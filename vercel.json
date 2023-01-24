@@ -14,8 +14,7 @@
   ],
   "headers": [
     {
-      "key": "access-control-allow-origin",
-      "value": "*"
+      "access-control-allow-origin": "*"
     }
   ]
 }
