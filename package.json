@@ -2,12 +2,6 @@
   "engines": {
     "node": "14.x"
   },
-  "scripts": {
-    "dev": "nodemon server.js",
-    "build": "vercel build",
-    "start": "vercel dev",
-    "now-build": "vercel build"
-  },
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
