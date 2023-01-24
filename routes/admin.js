@@ -23,22 +23,26 @@ router.route("/add").post((req, res) => {
 });
 
 router.route("/login").post((req, res) => {
-  const useremail = req.body.username;
-  const password = req.body.password;
-
-  Admin.findOne
+  Admin.find({ useremail: req.body.username })
     .then((admin) => {
-      if (admin.useremail === useremail && admin.password === password) {
-        res.send({
-          status: "success",
-          message: "Admin logged in!",
-          id: admin._id,
-        });
-      } else {
+      if (admin.length === 0) {
         res.send({
           status: "error",
-          message: "Admin not found!",
+          message: "Admin not found",
         });
+      } else {
+        if (admin[0].password === req.body.password) {
+          res.send({
+            status: "success",
+            message: "Admin logged in",
+            id: admin[0]._id,
+          });
+        } else {
+          res.send({
+            status: "error",
+            message: "Wrong password",
+          });
+        }
       }
     })
     .catch((err) => res.status(400).json("Error: " + err));
