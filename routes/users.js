@@ -39,6 +39,7 @@ router.route("/add").post((req, res) => {
       });
     })
     .catch((err) => res.status(400).json("Error: " + err));
+  res.setHeader("Access-Control-Allow-Origin", "*");
 });
 
 router.route("/login").post((req, res) => {
