@@ -23,7 +23,7 @@ router.route("/add").post((req, res) => {
     petType,
     breed,
     color,
-    image: fs.readFileSync()
+    image: fs.readFileSync(req.body.image),
     details,
     ownerId,
   });
