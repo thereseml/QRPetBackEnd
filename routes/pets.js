@@ -14,7 +14,6 @@ router.route("/add").post((req, res) => {
   const petType = req.body.petType;
   const breed = req.body.breed;
   const color = req.body.color;
-  const image = req.body.image;
   const details = req.body.details;
   const ownerId = req.body.ownerId;
 
@@ -23,7 +22,6 @@ router.route("/add").post((req, res) => {
     petType,
     breed,
     color,
-    image: fs.readFileSync()
     details,
     ownerId,
   });
@@ -63,7 +61,6 @@ router.route("/update/:id").post((req, res) => {
       pets.petType = req.body.petType;
       pets.breed = req.body.breed;
       pets.color = req.body.color;
-      pets.image = req.body.image;
       pets.details = req.body.details;
       pets.ownerId = req.body.ownerId;
 
