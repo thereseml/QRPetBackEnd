@@ -9,6 +9,7 @@ router.route("/").get((req, res) => {
 });
 
 router.route("/add").post((req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
   const firstname = req.body.firstname;
   const lastname = req.body.lastname;
   const useremail = req.body.useremail;
@@ -39,7 +40,6 @@ router.route("/add").post((req, res) => {
       });
     })
     .catch((err) => res.status(400).json("Error: " + err));
-  res.setHeader("Access-Control-Allow-Origin", "*");
 });
 
 router.route("/login").post((req, res) => {
