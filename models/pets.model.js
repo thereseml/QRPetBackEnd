@@ -5,7 +5,6 @@ const PetsSchema = mongoose.Schema({
   petType: { type: String, required: true },
   breed: { type: String },
   color: { type: String },
-  image: { data: Buffer, type: String },
   details: { type: String },
   ownerId: { type: String, required: true },
 });
