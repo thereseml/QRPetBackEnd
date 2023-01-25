@@ -10,10 +10,14 @@ router.route("/").get((req, res) => {
 
 // lägger till admin
 router.route("/add").post((req, res) => {
+  const firstname = req.body.firstname;
+  const lastname = req.body.lastname;
   const adminemail = req.body.username;
   const password = req.body.password;
 
   const newAdmin = new Admin({
+    firstname,
+    lastname,
     adminemail,
     password,
   });
