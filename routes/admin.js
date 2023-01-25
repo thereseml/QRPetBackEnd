@@ -12,7 +12,7 @@ router.route("/").get((req, res) => {
 router.route("/add").post((req, res) => {
   const firstname = req.body.firstname;
   const lastname = req.body.lastname;
-  const adminemail = req.body.username;
+  const adminemail = req.body.adminemail;
   const password = req.body.password;
 
   const newAdmin = new Admin({
@@ -36,25 +36,26 @@ router.route("/add").post((req, res) => {
 
 // loga in som admin
 router.route("/login").post((req, res) => {
-  Admin.find({ adminemail: req.body.username })
+  Admin.find({ adminemail: req.body.adminemail })
     .then((admin) => {
       if (admin.length === 0) {
         res.send({
           status: "error",
           message: "Admin not found",
         });
-      }
-      if (admin[0].password === req.body.password) {
-        res.send({
-          status: "success",
-          message: "Admin logged in",
-          id: admin[0]._id,
-        });
       } else {
-        res.send({
-          status: "error",
-          message: "Wrong password",
-        });
+        if (admin[0].password === req.body.password) {
+          res.send({
+            status: "success",
+            message: "Admin logged in",
+            id: admin[0]._id,
+          });
+        } else {
+          res.send({
+            status: "error",
+            message: "Wrong password",
+          });
+        }
       }
     })
     .catch((err) => res.status(400).json("Error: " + err));
