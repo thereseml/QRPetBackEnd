@@ -44,6 +44,18 @@ router.route("/login").post((req, res) => {
           message: "Admin not found",
         });
       }
+      if (admin[0].password === req.body.password) {
+        res.send({
+          status: "success",
+          message: "Admin logged in",
+          id: admin[0]._id,
+        });
+      } else {
+        res.send({
+          status: "error",
+          message: "Wrong password",
+        });
+      }
     })
     .catch((err) => res.status(400).json("Error: " + err));
 });
