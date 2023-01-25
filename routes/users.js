@@ -2,14 +2,15 @@ const router = require("express").Router();
 let Users = require("../models/users.model");
 let LoginUser = require("../models/loginUser.model");
 
+// hämtar alla användare
 router.route("/").get((req, res) => {
   Users.find()
     .then((users) => res.json(users))
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
+// lägger till användare
 router.route("/add").post((req, res) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
   const firstname = req.body.firstname;
   const lastname = req.body.lastname;
   const useremail = req.body.useremail;
@@ -42,33 +43,30 @@ router.route("/add").post((req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
+// logga in som användare
 router.route("/login").post((req, res) => {
   Users.find({ useremail: req.body.useremail })
-    .then(
-      (
-        user // user är en array med ett objekt
-      ) => {
-        if (user.length === 0) {
+    .then((user) => {
+      if (user.length === 0) {
+        res.send({
+          status: "error",
+          message: "User not found",
+        });
+      } else {
+        if (user[0].password === req.body.password) {
           res.send({
-            status: "error",
-            message: "User not found",
+            status: "success",
+            message: "User logged in",
+            id: user[0]._id,
           });
         } else {
-          if (user[0].password === req.body.password) {
-            res.send({
-              status: "success",
-              message: "User logged in",
-              id: user[0]._id,
-            });
-          } else {
-            res.send({
-              status: "error",
-              message: "Wrong password",
-            });
-          }
+          res.send({
+            status: "error",
+            message: "Wrong password",
+          });
         }
       }
-    )
+    })
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
@@ -81,26 +79,6 @@ router.route("/:id").get((req, res) => {
 router.route("/:id").delete((req, res) => {
   Users.findByIdAndDelete(req.params.id)
     .then(() => res.json("User and pet deleted."))
-    .catch((err) => res.status(400).json("Error: " + err));
-});
-
-router.route("/update/:id").put((req, res) => {
-  Users.findById(req.params.id)
-    .then((users) => {
-      users.firstname = req.body.firstname;
-      users.lastname = req.body.lastname;
-      users.useremail = req.body.useremail;
-      users.password = req.body.password;
-      users.phone = Number(req.body.phone);
-      users.address = req.body.address;
-      users.city = req.body.city;
-      users.zip = Number(req.body.zip);
-
-      users
-        .save()
-        .then(() => res.json("User updated!"))
-        .catch((err) => res.status(400).json("Error: " + err));
-    })
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
