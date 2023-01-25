@@ -5,8 +5,8 @@ POST http://localhost:8000/admin/add HTTP/1.1
 Content-Type: application/json
 
 {
-    "useremail": "tm-l@live.se",
-    "password": "hejadmin1",
+    "adminemail": "tm-ldssdf@live.se",
+    "password": "hesdfjadmin1",
 }
 
 
@@ -18,7 +18,7 @@ Content-Type: application/json
 {
     "firstname": "Esaa",
     "lastname": "Lindholm",
-    "useremail": "test45665@mail.com",
+    "useremail": "test45asd665@mail.com",
     "password": "he234324j123",
     "phone": "07623435",
     "address": "Vårgatan 1",
@@ -56,15 +56,6 @@ POST http://localhost:8000/admin/login HTTP/1.1
 Content-Type: application/json
 
 {
-    "useremail": "tm-l@live.se",
-    "password": "hejehj456",
-}
+    "adminemail": "hejhej",
 
-###
-POST http://localhost:8000/users/login HTTP/1.1
-Content-Type: application/json
-
-{
-    "useremail": "tm-l@live.se",
-    "password": "hejehj456"
 }
