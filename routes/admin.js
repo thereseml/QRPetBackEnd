@@ -18,7 +18,13 @@ router.route("/add").post((req, res) => {
 
   newAdmin
     .save()
-    .then(() => res.json("Admin added!"))
+    .then(() => {
+      res.send({
+        status: "success",
+        message: "Admin added",
+        id: newAdmin._id,
+      });
+    })
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
