@@ -22,7 +22,11 @@ app.use((req, res, next) => {
 
 app.use(
   cors({
-    origin: ["https://qr-pet.vercel.app", "http://localhost:3000"],
+    origin: [
+      "https://qr-pet.vercel.app",
+      "https://localhost:3000",
+      "https://qr-pet-thereseml.vercel.app/",
+    ],
   })
 );
 
