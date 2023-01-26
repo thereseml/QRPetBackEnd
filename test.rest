@@ -60,3 +60,6 @@ Content-Type: application/json
     "password": "hejhej123"
 
 }
+
+###
+GET http://localhost:8000/admin/ HTTP/1.1
