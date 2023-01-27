@@ -47,8 +47,8 @@ router.route("/owner/:id").get((req, res) => {
 });
 
 // ta bort djur med eget id
-router.route("/:id").delete((req, res) => {
-  Pets.findByIdAndDelete(req.params.id)
+router.route("owner/:id").delete((req, res) => {
+  Pets.findByIdAndDelete({ ownerId: req.params.id })
     .then(() => res.json("Pet deleted."))
     .catch((err) => res.status(400).json("Error: " + err));
 });
