@@ -20,16 +20,8 @@ app.use((req, res, next) => {
   next();
 });
 
-/* app.use(
-  cors({
-    origin: [
-      "https://qr-pet.vercel.app",
-      "https://localhost:3000",
-      "https://qr-pet-thereseml.vercel.app",
-    ],
-  })
-);
- */
+app.use(cors());
+
 app.use(express.json());
 
 const uri = process.env.MONGODB_URI;
