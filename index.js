@@ -7,7 +7,7 @@ require("dotenv").config();
 const app = express();
 const port = process.env.PORT || 8000;
 
-app.use((req, res, next) => {
+/* app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", true);
   res.setHeader(
     "Access-Control-Allow-Headers",
@@ -18,7 +18,7 @@ app.use((req, res, next) => {
     "GET, POST, PATCH, DELETE, OPTIONS"
   );
   next();
-});
+}); */
 
 app.use(
   cors({
