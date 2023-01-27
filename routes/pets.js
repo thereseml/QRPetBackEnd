@@ -53,6 +53,13 @@ router.route("/owner/:id").delete((req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
+// ta bort djur med eget id
+router.route("/:id").delete((req, res) => {
+  Pets.findByIdAndDelete(req.params.id)
+    .then(() => res.json("Pet deleted."))
+    .catch((err) => res.status(400).json("Error: " + err));
+});
+
 // uppdatera djur med eget id
 router.route("/update/:id").post((req, res) => {
   Pets.findById(req.params.id)
