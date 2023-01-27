@@ -53,9 +53,9 @@ router.route("/owner/:id").get((req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
-router.route("/:id").delete((req, res) => {
+router.route("owner/:id").delete((req, res) => {
   secondOwner
-    .findByIdAndDelete(req.params.id)
+    .findByIdAndDelete({ ownerId: req.params.id })
     .then(() => res.json("Second owner deleted."))
     .catch((err) => res.status(400).json("Error: " + err));
 });
