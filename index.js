@@ -25,7 +25,7 @@ app.use(
     origin: [
       "https://qr-pet.vercel.app",
       "https://localhost:3000",
-      "https://qr-pet-thereseml.vercel.app/",
+      "https://qr-pet-thereseml.vercel.app",
     ],
   })
 );
