@@ -7,7 +7,7 @@ require("dotenv").config();
 const app = express();
 const port = process.env.PORT || 8000;
 
-/* app.use((req, res, next) => {
+app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", true);
   res.setHeader(
     "Access-Control-Allow-Headers",
@@ -18,9 +18,9 @@ const port = process.env.PORT || 8000;
     "GET, POST, PATCH, DELETE, OPTIONS"
   );
   next();
-}); */
+});
 
-app.use(
+/* app.use(
   cors({
     origin: [
       "https://qr-pet.vercel.app",
@@ -29,7 +29,7 @@ app.use(
     ],
   })
 );
-
+ */
 app.use(express.json());
 
 const uri = process.env.MONGODB_URI;
