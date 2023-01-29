@@ -1,5 +1,6 @@
 const router = require("express").Router();
 let Admin = require("../models/admin.model");
+const CryptoJS = require("crypto-js");
 
 // hämtar alla admin
 router.route("/").get((req, res) => {
@@ -13,7 +14,10 @@ router.route("/add").post((req, res) => {
   const firstname = req.body.firstname;
   const lastname = req.body.lastname;
   const adminemail = req.body.adminemail;
-  const password = req.body.password;
+  const password = CryptoJS.AES.encrypt(
+    req.body.password,
+    process.env.KEY_SALT
+  ).toString();
 
   const newAdmin = new Admin({
     firstname,
@@ -44,7 +48,12 @@ router.route("/login").post((req, res) => {
           message: "Admin not found",
         });
       } else {
-        if (admin[0].password === req.body.password) {
+        if (
+          CryptoJS.AES.decrypt(
+            admin[0].password,
+            process.env.KEY_SALT
+          ).toString(CryptoJS.enc.Utf8) === req.body.password
+        ) {
           res.send({
             status: "success",
             message: "Admin logged in",

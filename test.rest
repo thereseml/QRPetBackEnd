@@ -18,7 +18,7 @@ Content-Type: application/json
 {
     "firstname": "Esaa",
     "lastname": "Lindholm",
-    "useremail": "test45asd665@mail.com",
+    "useremail": "test123@mail.com",
     "password": "he234324j123",
     "phone": "07623435",
     "address": "Vårgatan 1",
@@ -52,12 +52,12 @@ GET http://localhost:8000/pets/owner/63c540a51475749c5ac2d089 HTTP/1.1
 DELETE http://localhost:8000/pets/owner/63c52e64b34ff01fc5bad842 HTTP/1.1
 
 ###
-POST http://localhost:8000/admin/login HTTP/1.1
+POST http://localhost:8000/users/login HTTP/1.1
 Content-Type: application/json
 
 {
-    "adminemail": "tm-l@live.se",
-    "password": "hejhej123"
+    "useremail": "test123@mail.com",
+    "password": "he234324j123"
 
 }
 

@@ -1,6 +1,6 @@
 const router = require("express").Router();
 let Users = require("../models/users.model");
-let LoginUser = require("../models/loginUser.model");
+const CryptoJS = require("crypto-js");
 
 // hämtar alla användare
 router.route("/").get((req, res) => {
@@ -14,7 +14,10 @@ router.route("/add").post((req, res) => {
   const firstname = req.body.firstname;
   const lastname = req.body.lastname;
   const useremail = req.body.useremail;
-  const password = req.body.password;
+  const password = CryptoJS.AES.encrypt(
+    req.body.password,
+    process.env.KEY_SALT
+  ).toString();
   const phone = Number(req.body.phone);
   const address = req.body.address;
   const city = req.body.city;
@@ -53,7 +56,11 @@ router.route("/login").post((req, res) => {
           message: "User not found",
         });
       } else {
-        if (user[0].password === req.body.password) {
+        if (
+          CryptoJS.AES.decrypt(user[0].password, process.env.KEY_SALT).toString(
+            CryptoJS.enc.Utf8
+          ) === req.body.password
+        ) {
           res.send({
             status: "success",
             message: "User logged in",
