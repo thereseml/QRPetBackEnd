@@ -5,8 +5,10 @@ POST http://localhost:8000/admin/add HTTP/1.1
 Content-Type: application/json
 
 {
-    "adminemail": "tm-ldssdf@live.se",
-    "password": "hesdfjadmin1",
+    "firstname": "Therese",
+    "lastname": "Lindholm",
+    "adminemail": "tm-ljkhj@live.se",
+    "password": "ThiSiSAdminPaSS"
 }
 
 
@@ -50,6 +52,16 @@ GET http://localhost:8000/pets/owner/63c540a51475749c5ac2d089 HTTP/1.1
 
 ###
 DELETE http://localhost:8000/pets/owner/63c52e64b34ff01fc5bad842 HTTP/1.1
+
+###
+POST http://localhost:8000/admin/login HTTP/1.1
+Content-Type: application/json
+
+{
+    "adminemail": "tm-ljkhj@live.se",
+    "password": "ThiSiSAdminPaSS"
+
+}
 
 ###
 POST http://localhost:8000/users/login HTTP/1.1
