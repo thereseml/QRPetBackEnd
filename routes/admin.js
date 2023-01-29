@@ -11,17 +11,13 @@ router.route("/").get((req, res) => {
 
 // lägger till admin
 router.route("/add").post((req, res) => {
-  const firstname = req.body.firstname;
-  const lastname = req.body.lastname;
   const adminemail = req.body.adminemail;
   const password = CryptoJS.AES.encrypt(
     req.body.password,
-    process.env.KEY_SALT
+    process.env.ADMIN_SALT
   ).toString();
 
   const newAdmin = new Admin({
-    firstname,
-    lastname,
     adminemail,
     password,
   });
@@ -51,7 +47,7 @@ router.route("/login").post((req, res) => {
         if (
           CryptoJS.AES.decrypt(
             admin[0].password,
-            process.env.KEY_SALT
+            process.env.ADMIN_SALT
           ).toString(CryptoJS.enc.Utf8) === req.body.password
         ) {
           res.send({
