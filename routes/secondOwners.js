@@ -1,6 +1,7 @@
 const router = require("express").Router();
 let secondOwner = require("../models/secondOwner.model");
 
+// hämta alla second owners
 router.route("/").get((req, res) => {
   secondOwner
     .find()
@@ -11,8 +12,6 @@ router.route("/").get((req, res) => {
 router.route("/add").post((req, res) => {
   const firstname = req.body.firstname;
   const lastname = req.body.lastname;
-  const useremail = req.body.useremail;
-  const password = req.body.password;
   const phone = Number(req.body.phone);
   const address = req.body.address;
   const city = req.body.city;
@@ -22,8 +21,6 @@ router.route("/add").post((req, res) => {
   const newSecondOwner = new secondOwner({
     firstname,
     lastname,
-    useremail,
-    password,
     phone,
     address,
     city,
@@ -53,6 +50,7 @@ router.route("/owner/:id").get((req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
+// radera second owner med samma id som ägaren
 router.route("/owner/:id").delete((req, res) => {
   secondOwner
     .findOneAndDelete({ ownerId: req.params.id })
@@ -60,14 +58,13 @@ router.route("/owner/:id").delete((req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
-router.route("/update/:id").put((req, res) => {
+// updatera second owner med eget id
+router.route("update/:id").put((req, res) => {
   secondOwner
-    .findById(req.params.id)
+    .findById({ ownerId: req.params.id })
     .then((secondOwner) => {
       secondOwner.firstname = req.body.firstname;
       secondOwner.lastname = req.body.lastname;
-      secondOwner.useremail = req.body.useremail;
-      secondOwner.password = req.body.password;
       secondOwner.phone = Number(req.body.phone);
       secondOwner.address = req.body.address;
       secondOwner.city = req.body.city;
