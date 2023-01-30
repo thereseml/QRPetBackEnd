@@ -61,7 +61,7 @@ router.route("/owner/:id").delete((req, res) => {
 // updatera second owner med eget id
 router.route("update/:id").put((req, res) => {
   secondOwner
-    .findById({ ownerId: req.params.id })
+    .findById(req.params.id)
     .then((secondOwner) => {
       secondOwner.firstname = req.body.firstname;
       secondOwner.lastname = req.body.lastname;
