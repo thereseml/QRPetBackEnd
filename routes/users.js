@@ -83,6 +83,29 @@ router.route("/:id").get((req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
+router.route("/update/:id").post((req, res) => {
+  Users.findById(req.params.id)
+    .then((users) => {
+      users.firstname = req.body.firstname;
+      users.lastname = req.body.lastname;
+      users.useremail = req.body.useremail;
+      users.password = CryptoJS.AES.encrypt(
+        req.body.password,
+        process.env.KEY_SALT
+      ).toString();
+      users.phone = Number(req.body.phone);
+      users.address = req.body.address;
+      users.city = req.body.city;
+      users.zip = Number(req.body.zip);
+
+      users
+        .save()
+        .then(() => res.json("User updated!"))
+        .catch((err) => res.status(400).json("Error: " + err));
+    })
+    .catch((err) => res.status(400).json("Error: " + err));
+});
+
 router.route("/:id").delete((req, res) => {
   Users.findByIdAndDelete(req.params.id)
     .then(() => res.json("User deleted."))
