@@ -91,10 +91,6 @@ router.route("/update/:id").put((req, res) => {
       users.firstname = req.body.firstname;
       users.lastname = req.body.lastname;
       users.useremail = req.body.useremail;
-      users.password = CryptoJS.AES.encrypt(
-        req.body.password,
-        process.env.KEY_SALT
-      ).toString();
       users.phone = Number(req.body.phone);
       users.address = req.body.address;
       users.city = req.body.city;
