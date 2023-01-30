@@ -73,3 +73,17 @@ Content-Type: application/json
 
 ###
 GET http://localhost:8000/admin/ HTTP/1.1
+
+###
+PUT http://localhost:8000/secondOwner/update/63d7bfae0416a3ba2b9382c6 HTTP/1.1
+Content-Type: application/json
+
+{
+    "firstname": "Esa",
+    "lastname": "Lindholm",
+    "phone": "07623435",
+    "address": "Vårgatan 1",
+    "city": "Höganäs",
+    "zip": "26334",
+    "ownerId": "26516181102"
+}
