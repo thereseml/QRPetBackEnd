@@ -46,7 +46,7 @@ router.route("/owner/:id").get((req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
-// ta bort djur med eget id
+// ta bort djur med samma id som ägaren
 router.route("/owner/:id").delete((req, res) => {
   Pets.findOneAndDelete({ ownerId: req.params.id })
     .then(() => res.json("Pet deleted."))
@@ -61,7 +61,7 @@ router.route("/:id").delete((req, res) => {
 });
 
 // uppdatera djur med eget id
-router.route("/update/:id").post((req, res) => {
+router.route("/update/:id").put((req, res) => {
   Pets.findById(req.params.id)
     .then((pets) => {
       pets.name = req.body.name;

@@ -77,12 +77,14 @@ router.route("/login").post((req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
+// hämta en användare
 router.route("/:id").get((req, res) => {
   Users.findById(req.params.id)
     .then((users) => res.json(users))
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
+// route för uppdatering
 router.route("/update/:id").post((req, res) => {
   Users.findById(req.params.id)
     .then((users) => {
@@ -106,6 +108,7 @@ router.route("/update/:id").post((req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
+// route för borttagning
 router.route("/:id").delete((req, res) => {
   Users.findByIdAndDelete(req.params.id)
     .then(() => res.json("User deleted."))
