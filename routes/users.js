@@ -85,7 +85,7 @@ router.route("/:id").get((req, res) => {
 });
 
 // route för uppdatering
-router.route("/update/:id").post((req, res) => {
+router.route("/update/:id").put((req, res) => {
   Users.findById(req.params.id)
     .then((users) => {
       users.firstname = req.body.firstname;
