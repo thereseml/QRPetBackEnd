@@ -58,6 +58,14 @@ router.route("/owner/:id").delete((req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
+// radera second owner med eget id
+router.route("/:id").delete((req, res) => {
+  secondOwner
+    .findByIdAndDelete(req.params.id)
+    .then(() => res.json("Second owner deleted."))
+    .catch((err) => res.status(400).json("Error: " + err));
+});
+
 // updatera second owner med eget id
 router.route("/update/:id").put((req, res) => {
   secondOwner
