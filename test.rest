@@ -5,7 +5,7 @@ POST http://localhost:8000/admin/add HTTP/1.1
 Content-Type: application/json
 
 {
-    "adminemail": "tm-l@live.se",
+    "adminemail": "admin@admin.se",
     "password": "ThiSiSAdminPaSS1"
 }
 
